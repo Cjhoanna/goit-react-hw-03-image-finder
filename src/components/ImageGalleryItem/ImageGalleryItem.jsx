@@ -17,11 +17,11 @@ class ImageGalleryItem extends Component {
     return (
       <>
         <li class="gallery-item" key={id}>
-          <img src={src} alt="photo" />
+          <img src={src} alt="foto" />
         </li>
         {this.state.showModal && (
           <Modal src={largeSrc} onClose={this.toggleModal}>
-            <img src={largeSrc} alt="photo" />
+            <img src={largeSrc} alt="foto" />
           </Modal>
         )}
       </>
