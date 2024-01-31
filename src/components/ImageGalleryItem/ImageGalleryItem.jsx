@@ -13,14 +13,19 @@ class ImageGalleryItem extends Component {
   };
 
   render() {
-    const { id, src, largeSrc } = this.props;
+    const { id, src, largeSrc, styles } = this.props;
     return (
       <>
-        <li class="gallery-item" key={id}>
-          <img src={src} alt="foto" />
+        <li className={styles.ImageGalleryItem} key={id}>
+          <img
+            onClick={this.toggleModal}
+            className={styles['ImageGalleryItem-image']}
+            src={src}
+            alt="foto"
+          />
         </li>
         {this.state.showModal && (
-          <Modal src={largeSrc} onClose={this.toggleModal}>
+          <Modal styles={styles} src={largeSrc} onClose={this.toggleModal}>
             <img src={largeSrc} alt="foto" />
           </Modal>
         )}

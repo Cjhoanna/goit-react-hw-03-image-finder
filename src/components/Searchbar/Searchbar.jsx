@@ -15,20 +15,21 @@ class Searchbar extends Component {
     this.setState({ keyword: '' });
   };
   render() {
+    const { styles } = this.props;
     return (
-      <header className="searchbar">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
+      <header className={styles.Searchbar}>
+        <form className={styles.SearchForm} onSubmit={this.handleSubmit}>
+          <button type="submit" className={styles['SearchForm-button']}>
+            <span className={styles['SearchForm-label']}></span>
           </button>
 
           <input
-            className="input"
+            className={styles['SearchForm-input']}
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            name='keyword'
+            name="keyword"
             value={this.state.keyword}
             onChange={this.handleSearchChange}
           />

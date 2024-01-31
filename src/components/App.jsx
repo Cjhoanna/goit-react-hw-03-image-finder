@@ -4,6 +4,7 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import fetchImages from 'services/pixabay';
 import Loader from './Loader/Loader';
 import Button from './Button/Button';
+import styles from '../styles.module.css';
 
 class App extends Component {
   state = {
@@ -22,7 +23,7 @@ class App extends Component {
     const nextPage = pageNumber;
 
     if (prevWord !== nextWord) {
-      this.setState({status:"LOADING"})
+      this.setState({ status: 'LOADING' });
       const newImage = fetchImages(nextWord, pageNumber);
       newImage
         .then(data => {
@@ -50,7 +51,7 @@ class App extends Component {
     }
 
     if (prevPage !== nextPage && prevWord === nextWord) {
-      this.setState({status:"LOADING"})
+      this.setState({ status: 'LOADING' });
       const newImage = fetchImages(nextWord, pageNumber);
       newImage
         .then(data => {
@@ -97,19 +98,20 @@ class App extends Component {
   };
 
   render() {
-
-    const {searchword,pageNumber,pageTotal,status,images}= this.state;
-    const lastPage=this.lastPageDef();
+    const { searchword, pageNumber, pageTotal, status, images } = this.state;
+    const lastPage = this.lastPageDef();
     return (
-      <div>
-        <Searchbar onSubmit={this.submitHandler} />
-        <ImageGallery data={images}/>
-        {status==="ERROR"&&(<p>No images for keyword "{searchword}"</p>)}
-        {status==="LOADING"&& <Loader/>}
-        {status==="OK" && images.length >11 && pageNumber!== lastPage &&(
-          <Button onClick={this.handleIncrement}/>
+      <div className={styles.App}>
+        <Searchbar onSubmit={this.submitHandler} styles={styles} />
+        <ImageGallery data={images} styles={styles} />
+        {status === 'ERROR' && <p>No images for keyword "{searchword}"</p>}
+        {status === 'LOADING' && <Loader />}
+        {status === 'OK' && images.length > 11 && pageNumber !== lastPage && (
+          <Button onClick={this.handleIncrement} styles={styles} />
         )}
-        {pageNumber=== lastPage && pageTotal>0 && (<p>You've reached the end of search results</p>)}
+        {pageNumber === lastPage && pageTotal > 0 && (
+          <p>You've reached the end of search results</p>
+        )}
       </div>
     );
   }

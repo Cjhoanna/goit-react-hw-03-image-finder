@@ -15,15 +15,16 @@ class Modal extends Component {
     }
   };
   handleBackdropClick = event => {
+    console.log(event.currentTarget);
     if (event.currentTarget === event.target) {
       this.props.onClose();
     }
   };
   render() {
-    const { children } = this.props;
+    const { children, styles } = this.props;
     return createPortal(
-      <div onClick={this.handleBackdropClick}>
-        <div>{children}</div>
+      <div onClick={this.handleBackdropClick} className={styles.Overlay}>
+        <div className={styles.Modal}>{children}</div>
       </div>,
       modalRoot
     );
